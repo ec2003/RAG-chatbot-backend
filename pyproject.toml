@@ -1,0 +1,14 @@
+[project]
+name = "hcm-project"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi[standard]>=0.116.1",
+    "langchain-community>=0.3.29",
+    "langchain-google-genai>=2.1.10",
+    "langchain[google-genai]>=0.3.27",
+    "pymilvus>=2.6.1",
+    "python-dotenv>=1.1.1",
+]
