@@ -3,6 +3,7 @@
         {
             "src": "Dockerfile",
             "use": "@vercel/docker",
+        }
     ],
     "routes": [
         {
