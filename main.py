@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import os
 from dotenv import load_dotenv
@@ -36,10 +36,15 @@ app.add_middleware(
 async def chat_endpoint(chat_request: ChatRequest):
     question = chat_request.messages[-1].content
     chat_history = [msg.model_dump() for msg in chat_request.messages[:-1]]
+
+    current_api_key = None
     for api_key in API_KEYS:
         if verify_api_key(api_key):
             current_api_key = api_key
             break
+    if current_api_key is None:
+        raise HTTPException(status_code=503, detail="No valid API Key available to process the request.")
+
     response, context = chat_with_milvus(question, 
                                          current_api_key, 
                                          chat_history,
